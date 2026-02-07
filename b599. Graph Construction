@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int n;
+    while (cin>>n) {
+        if (n==0) {
+            break;
+        }
+        int sum=0;
+        vector<int> vertices(n);
+        for (int i=0;i<n;i++) {
+            cin>>vertices[i];
+            sum+=vertices[i];
+        }
+        if (sum%2!=0) {
+            cout<<'N'<<"\n";
+            continue;
+        }
+        bool finished=false;
+        while (true) {
+            sort(vertices.rbegin(),vertices.rend());
+            if (vertices[0]==0) {
+                cout<<"Y"<<"\n";
+                break;
+            }
+            if (vertices[0]>=n) {
+                cout<<"N"<<"\n";
+                break;
+            }
+            for (int i=1;i<=vertices[0];i++) {
+                vertices[i]--;
+                if (vertices[i]<0) {
+                    cout<<"N"<<"\n";
+                    finished=true;
+                    break;
+                }
+            }
+            vertices[0]=0;
+            if (finished) {
+                break;
+            }
+        }
+    }
+    return 0;
+}
